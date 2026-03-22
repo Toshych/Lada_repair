@@ -1,0 +1,9 @@
+body {
+    margin: 0;
+}
+
+.page {
+    margin: 0px auto;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+}
