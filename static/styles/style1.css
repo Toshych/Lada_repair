@@ -32,6 +32,7 @@ body {
 
 .left {
     grid-row: 2 / 4;
+    background-color: rgb(210, 190, 146);
 }
 
 .content {
@@ -43,4 +44,32 @@ body {
     color: #aaa;
     grid-column: 1/-1;
     grid-row: 4;
+}
+.menu {
+    display: flex;
+    gap: 20px;
+}
+.nav {
+    /* display: flex; */
+    width: 18px;
+    padding: 15px;
+    margin: 5px;
+    font-weight: bold;
+    position: relative;
+    cursor: pointer;
+}
+.submenu {
+    display: none;
+    position: absolute;
+    background-color: rgb(210, 190, 146);
+    width: 30vh;
+    top: -5px;
+    height: 84vh;
+}
+.submenu>div {
+    padding: 5px 10px;
+}
+
+.nav:hover .submenu {
+    display: block;
 }
