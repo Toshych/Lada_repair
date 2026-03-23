@@ -1,17 +1,32 @@
-.TableWithModels{
+.TableWithModels {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr ;
+    grid-template-columns: repeat(4, 1fr);
     gap: 20px;
     padding: 20px;
 }
-.carcard{
+
+.carcard {
     text-align: center;
     background-color: #e8e8e8;
-    
+    border: 1px solid #d0d0d0;
+    border-radius: 10px;
+    padding: 10px;
+    transition: transform 0.3s ease, border-color 0.3s ease;
 }
-.carcard img{
+
+.carcard:hover {
+    transform: translateY(-5px);
+    border-color: rgb(194, 51, 51);
+}
+
+.carcard img {
     width: 100%;
     height: 200px;
     object-fit: cover;
-    
+    border-radius: 8px;
+}
+
+.carcard h1 {
+    font-size: 22px;
+    color: #333;
 }

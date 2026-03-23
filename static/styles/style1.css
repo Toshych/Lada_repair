@@ -24,6 +24,17 @@ body {
     /* это нужно, чтобы у нас эта тема занимала всю строку */
 
 }
+.site-title {
+    font-size: 30px;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.site-subtitle {
+    font-size: 14px;
+    color: #cfcfcf;
+    margin-top: 4px;
+}
 
 .way {
     grid-column: 2/-1;
