@@ -43,7 +43,10 @@ body {
 
 .left {
     grid-row: 2 / 4;
-    background-color: rgb(210, 190, 146);
+    background-color: rgb(191, 191, 191);
+    position: relative;
+    /* элемент позиционируется относительно своего
+     исходного положения в потоке документа. */
 }
 
 .content {
@@ -61,21 +64,20 @@ body {
     gap: 20px;
 }
 .nav {
-    /* display: flex; */
     width: 18px;
     padding: 15px;
     margin: 5px;
     font-weight: bold;
-    position: relative;
     cursor: pointer;
 }
 .submenu {
     display: none;
     position: absolute;
-    background-color: rgb(210, 190, 146);
-    width: 30vh;
-    top: -5px;
-    height: 84vh;
+    left: 30%;
+    top: 0;
+    bottom: 0;
+    /* width: clamp(220px, 25vw, 360px); */
+    background-color: rgb(191, 191, 191);
 }
 .submenu>div {
     padding: 5px 10px;
@@ -87,8 +89,5 @@ body {
 a {
     outline: none;
     text-decoration: none;
-    color: black;
-}
-a:link {
     color: black;
 }
