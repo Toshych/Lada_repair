@@ -73,3 +73,11 @@ body {
 .nav:hover .submenu {
     display: block;
 }
+a {
+    outline: none;
+    text-decoration: none;
+    color: black;
+}
+a:link {
+    color: black;
+}
