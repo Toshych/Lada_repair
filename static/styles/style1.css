@@ -47,7 +47,13 @@ body {
     width: 100%;
     height: 90px;
     object-fit: cover;
+    transition: all 0.3s ease;
+}
 
+.photoheader a:hover img {
+    transform: scale(1.05);
+    filter: brightness(1.1);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
 }
 
 .way {
@@ -100,6 +106,7 @@ body {
     transform: translateX(-20px);
     transition: all 0.3s ease;
     pointer-events: none;
+    visibility: hidden;
 }
 
 .submenu>div {
@@ -116,6 +123,7 @@ body {
     opacity: 1;
     transform: translateX(0);
     pointer-events: auto;
+    visibility: visible;
 }
 
 a {
