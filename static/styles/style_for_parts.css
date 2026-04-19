@@ -1,0 +1,199 @@
+/* Стили для страницы справочника магазинов запчастей */
+.parts-container {
+    padding: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.parts-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 2.5rem;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.intro-text {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 40px;
+    line-height: 1.6;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.sites-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.site-card {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    border: 1px solid #e0e0e0;
+    display: flex;
+    flex-direction: column;
+    min-height: 550px;
+}
+
+.site-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.site-header {
+    background: #e31e24;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+}
+
+.site-logo {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.site-logo img, .site-logo object {
+    max-height: 50px;
+    max-width: 150px;
+    object-fit: contain;
+}
+
+.site-logo-svg {
+    width: 150px;
+    height: 50px;
+}
+
+.site-name {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.site-url {
+    font-size: 0.9rem;
+    opacity: 0.9;
+    word-break: break-all;
+}
+
+.site-rating {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.site-content {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+}
+
+.site-description {
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.features-section {
+    margin-bottom: 20px;
+}
+
+.features-title {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+}
+
+.features-list {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.features-list li {
+    margin-bottom: 8px;
+    color: #555;
+    position: relative;
+}
+
+.features-list li:before {
+    content: "•";
+    color: #e31e24;
+    font-weight: bold;
+    position: absolute;
+    left: -15px;
+}
+
+.pros-list {
+    color: #2e7d32;
+}
+
+.pros-list li:before {
+    content: "+";
+}
+
+.cons-list {
+    color: #c62828;
+}
+
+.cons-list li:before {
+    content: "−";
+}
+
+.visit-button {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background: #e31e24;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    text-align: center;
+    text-decoration: none;
+    margin-top: auto; /* Располагаем кнопку внизу */
+}
+
+.visit-button:hover {
+    background: #c41218;
+}
+
+@media (max-width: 768px) {
+    .sites-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .parts-container {
+        padding: 20px;
+    }
+}
