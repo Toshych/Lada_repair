@@ -90,13 +90,16 @@ body {
 }
 
 .submenu {
-    display: none;
     position: absolute;
     left: 30%;
     top: 0;
     bottom: 0;
     /* width: clamp(220px, 25vw, 360px); */
     background-color: rgb(191, 191, 191);
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: all 0.3s ease;
+    pointer-events: none;
 }
 
 .submenu>div {
@@ -110,7 +113,9 @@ body {
 }
 
 .nav:hover .submenu {
-    display: block;
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
 }
 
 a {
