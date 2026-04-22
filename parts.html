@@ -1,21 +1,18 @@
 <!DOCTYPE html>
 <html lang="ru">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lada Repair - Ремонт и обслуживание LADA</title>
+    <title>Lada Repair - Где купить запчасти для LADA</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Oswald:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="static/styles/style1.css">
-    <link rel="stylesheet" href="static/styles/styleformain.css">
+    <link rel="stylesheet" href="static/styles/style_for_parts.css">
 </head>
-
 <body>
     <div class="page">
-
         <div class="header">
             <div class="header-left">
                 <div class="site-title">Lada Repair</div>
@@ -28,7 +25,7 @@
             </div>
         </div>
 
-        <div class="way">Главная</div>
+        <div class="way">Где купить запчасти</div>
 
         <div class="left">
             <div class="menu">
@@ -46,25 +43,23 @@
         </div>
 
         <div class="content">
-            <section class="hero-section">
-                <div class="hero-content">
-                    <h1 class="hero-title">Всё о ремонте LADA</h1>
-                    <p class="hero-subtitle">
-                        Полный справочник по моделям, типовым поломкам и их решению.<br>
-                        Советы от профессионалов и владельцев
-                    </p>
-                    <div class="hero-buttons">
-                        <a href="models_cars.html" class="btn-primary">Выбрать модель</a>
-                        <a href="#" class="btn-secondary">Популярные проблемы</a>
-                    </div>
+            <div class="parts-container">
+                <h1 class="parts-title">Где купить запчасти для LADA</h1>
+
+                <div class="intro-text">
+                    <p>На этой странице представлен обзор популярных интернет-магазинов, где можно купить запчасти для автомобилей LADA.
+                    Каждый из них имеет свои преимущества и недостатки, которые помогут вам сделать правильный выбор.</p>
                 </div>
-            </section>
 
-           
-        
+                <div class="sites-grid" id="sitesGrid">
+                    <!-- Сайты будут загружаться сюда -->
+                </div>
+            </div>
+        </div>
+
         <div class="footer"></div>
-
     </div>
-</body>
 
+    <script src="static/js/parts.js"></script>
+</body>
 </html>

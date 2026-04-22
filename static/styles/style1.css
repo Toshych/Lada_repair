@@ -1,75 +1,156 @@
 body {
     margin: 0;
-    height: 100%;
+    padding: 0;
+    height: 100vh;
     width: 100%;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-family: 'Inter', sans-serif;
     background: #f5f5f5;
     color: #333;
     line-height: 1.6;
+    overflow-x: hidden;
 }
 
 .page {
-    margin: 0px auto;
+    margin: 0;
+    padding: 0;
     display: grid;
     grid-template-columns: 10% 1fr;
-    grid-template-rows: 2fr 1fr 20fr 2fr;
+    grid-template-rows: auto 1fr auto;
     min-height: 100vh;
+    height: 100vh;
 }
 
 .header {
-    background: #2a2a2a;
+    background: #1a1a1a;
     color: #aaa;
     grid-column: 1 / -1;
     grid-row: 1;
-    /* это нужно, чтобы у нас эта тема занимала всю строку */
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    height: 80px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
 
+.header-left {
+    display: flex;
+    flex-direction: column;
+}
+
+.site-title {
+    font-size: 28px;
+    font-weight: 600;
+    color: #ffffff;
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: 1px;
+}
+
+.site-subtitle {
+    font-size: 13px;
+    color: #e31e24;
+    margin-top: 2px;
+    font-weight: 500;
+}
+
+.photoheader {
+    margin-left: auto;
+    padding: 0 20px;
+}
+
+.photoheader img {
+    width: auto;
+    height: 60px;
+    object-fit: contain;
+    transition: all 0.3s ease;
+}
+
+.photoheader a:hover img {
+    transform: scale(1.05);
+    filter: brightness(1.1);
+    box-shadow: 0 0 15px rgba(227, 30, 36, 0.5);
 }
 
 .way {
-    grid-column: 2/-1;
+    grid-column: 2;
     grid-row: 2;
+    padding: 10px 20px;
+    background: #f0f0f0;
+    font-size: 14px;
+    color: #555;
 }
 
 .left {
     grid-row: 2 / 4;
-    background-color: rgb(210, 190, 146);
+    background-color: rgb(191, 191, 191);
+    position: relative;
+    opacity: 1;
 }
 
 .content {
     grid-row: 3;
+    padding: 0;
+    margin: 0;
 }
 
 .footer {
-    background: #2a2a2a;
+    background: #1a1a1a;
     color: #aaa;
     grid-column: 1/-1;
     grid-row: 4;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
 }
+
 .menu {
     display: flex;
     gap: 20px;
 }
+
 .nav {
-    /* display: flex; */
     width: 18px;
     padding: 15px;
     margin: 5px;
     font-weight: bold;
-    position: relative;
     cursor: pointer;
+    color: #333;
 }
+
 .submenu {
-    display: none;
     position: absolute;
-    background-color: rgb(210, 190, 146);
-    width: 30vh;
-    top: -5px;
-    height: 84vh;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 250px;
+    background-color: rgb(191, 191, 191);
+    opacity: 1;
+    transform: translateX(-20px);
+    transition: all 0.3s ease;
+    pointer-events: none;
+    visibility: hidden;
+    z-index: 1000;
 }
+
 .submenu>div {
     padding: 5px 10px;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+.submenu>div:hover {
+    transform: translateX(5px);
+    background-color: #4f74cb;
 }
 
 .nav:hover .submenu {
-    display: block;
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+    visibility: visible;
+}
+
+a {
+    outline: none;
+    text-decoration: none;
+    color: black;
 }
