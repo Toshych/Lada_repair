@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lada Repair - Ремонт и обслуживание LADA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Oswald:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="static/styles/style1.css">
+    <link rel="stylesheet" href="static/styles/styleformain.css">
+    <link rel="stylesheet" href="static/styles/forum.css">
+</head>
+
+<body>
+    <div class="page">
+
+        <div class="header">
+            <div class="header-left">
+                <div class="site-title">Lada Repair</div>
+                <div class="site-subtitle">Модели и типовые поломки LADA</div>
+            </div>
+            <div class="photoheader">
+                <a href="index.html">
+                    <img src="static/styles/image/photoheader.png" alt="Lada Repair Logo">
+                </a>
+            </div>
+        </div>
+
+        <div class="way">Главная</div>
+
+        <div class="left">
+            <div class="menu">
+                <div class="nav">
+                    &#9776;
+                    <div class="submenu">
+                        <div><a href="models_cars.html">Модели</a></div>
+                        <div><a href="#">Тип поломки</a></div>
+                        <div><a href="forumm.html">Форум</a></div>
+                        <div><a href="#">Распространённые проблемы</a></div>
+                        <div><a href="parts.html">Запчасти</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <main class="content">
+            <div class="forum-wrapper">
+                <div class="forum-top">
+                    <h1>Обсуждения</h1>
+                    <button class="f-btn f-btn-primary" id="btnToggleCreate">+ Новая тема</button>
+                </div>
+
+                <!-- Пустое состояние -->
+                <div class="forum-empty" id="emptyState">
+                    <p><strong>Обсуждений пока нет.</strong></p>
+                    <p>Задайте вопрос о поломке, поделитесь опытом ремонта или обсудите модель LADA.</p>
+                </div>
+
+                <!-- Список тем -->
+                <ul class="topic-list" id="topicList"></ul>
+
+                <!-- Форма создания темы -->
+                <section class="create-form hidden" id="createForm">
+                    <h2>Создать тему</h2>
+                    <form id="newTopicForm">
+                        <input type="text" id="topicTitle" placeholder="Заголовок (например: Плавают обороты на Приоре 1.6)" required>
+                        <textarea id="topicContent" placeholder="Опишите проблему подробнее: модель, год, пробег, симптомы..." rows="5" required></textarea>
+                        <div class="form-actions">
+                            <button type="submit" class="f-btn f-btn-primary">Опубликовать</button>
+                            <button type="button" class="f-btn f-btn-secondary" id="btnCancelCreate">Отмена</button>
+                        </div>
+                    </form>
+                </section>
+            </div>
+        </main>
+
+        <footer class="footer">
+            &copy; 2026 Lada Repair. Все права защищены.
+        </footer>
+    </div>
+
+<script src="static/js/forum.js"></script>
+
+</body>
+
+</html>
