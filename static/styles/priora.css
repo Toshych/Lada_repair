@@ -1,115 +1,394 @@
-/* Priora specific styles */
-.content {
-    padding: 20px;
-    overflow-y: auto;
-    height: calc(100vh - 160px);
-}
-
-.category-section {
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    margin-bottom: 20px;
-}
-
-.category-title {
-    font-size: 24px;
-    font-weight: 600;
-    color: #e31e24;
-    margin-bottom: 15px;
-    border-bottom: 2px solid #e31e24;
-    padding-bottom: 10px;
-}
-
-.breakdown-list {
-    list-style: none;
-    padding: 0;
+ /* ========== БАЗОВЫЕ СТИЛИ (из вашего кода, сохранены и дополнены) ========== */
+ * {
     margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.breakdown-item {
-    margin-bottom: 10px;
-    padding: 10px;
-    background-color: #f8f8f8;
-    border-radius: 5px;
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100%;
+    font-family: 'Inter', sans-serif;
+    background: #f5f5f5;
+    color: #333;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+.page {
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 10% 1fr;
+    grid-template-rows: auto 1fr auto;
+    min-height: 100vh;
+    height: 100vh;
+}
+
+.header {
+    background: #1a1a1a;
+    color: #aaa;
+    grid-column: 1 / -1;
+    grid-row: 1;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    height: 80px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.header-left {
+    display: flex;
+    flex-direction: column;
+}
+
+.site-title {
+    font-size: 28px;
+    font-weight: 600;
+    color: #ffffff;
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: 1px;
+}
+
+.site-subtitle {
+    font-size: 13px;
+    color: #e31e24;
+    margin-top: 2px;
+    font-weight: 500;
+}
+
+.photoheader {
+    margin-left: auto;
+    padding: 0 20px;
+}
+
+.photoheader img {
+    width: auto;
+    height: 60px;
+    object-fit: contain;
     transition: all 0.3s ease;
 }
 
-.breakdown-item:hover {
-    background-color: #e8e8e8;
-    transform: translateX(5px);
+.photoheader a:hover img {
+    transform: scale(1.05);
+    filter: brightness(1.1);
+    box-shadow: 0 0 15px rgba(227, 30, 36, 0.5);
 }
 
-.breakdown-link {
-    display: block;
+.way {
+    grid-column: 2;
+    grid-row: 2;
+    padding: 10px 20px;
+    background: #f0f0f0;
+    font-size: 14px;
+    color: #555;
+}
+
+.left {
+    grid-row: 2 / 4;
+    background-color: rgb(191, 191, 191);
+    position: relative;
+    opacity: 1;
+}
+
+.content {
+    grid-row: 3;
+    padding: 30px 30px 40px 30px;
+    margin: 0;
+    overflow-y: auto;
+    background: #f5f5f5;
+}
+
+.footer {
+    background: #1a1a1a;
+    color: #aaa;
+    grid-column: 1/-1;
+    grid-row: 4;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+}
+
+.menu {
+    display: flex;
+    gap: 20px;
+}
+
+.nav {
+    width: 18px;
+    padding: 15px;
+    margin: 5px;
+    font-weight: bold;
+    cursor: pointer;
     color: #333;
+}
+
+.submenu {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 250px;
+    background-color: rgb(191, 191, 191);
+    opacity: 1;
+    transform: translateX(-20px);
+    transition: all 0.3s ease;
+    pointer-events: none;
+    visibility: hidden;
+    z-index: 1000;
+}
+
+.submenu>div {
+    padding: 5px 10px;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+.submenu>div:hover {
+    transform: translateX(5px);
+    background-color: #4f74cb;
+}
+
+.nav:hover .submenu {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+    visibility: visible;
+}
+
+a {
+    outline: none;
+    text-decoration: none;
+    color: black;
+}
+
+/* ========== ДОПОЛНИТЕЛЬНЫЕ СТИЛИ ДЛЯ СТРАНИЦЫ "ЧАСТЫЕ ПОЛОМКИ" ========== */
+/* тёмная карточная сетка в стиле минимализм + тёмные тона (но вписывается в светлый фон контента) */
+.page-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 32px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: #1a1a1a;
+    border-left: 5px solid #e31e24;
+    padding-left: 20px;
+    letter-spacing: 1px;
+}
+
+.section-desc {
+    color: #4a4a4a;
+    margin-bottom: 35px;
+    font-size: 16px;
+    padding-left: 25px;
+    border-bottom: 1px solid #ddd;
+    display: inline-block;
+    padding-bottom: 6px;
+}
+
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    gap: 30px;
+    margin-top: 15px;
+}
+
+/* карточка в тёмных тонах, но с отсылкой к вашему стилю */
+.failure-card {
+    background: #181e26;
+    border-radius: 24px;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    cursor: default;
+}
+
+.failure-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 28px 38px -14px rgba(0, 0, 0, 0.6);
+    border-color: rgba(227, 30, 36, 0.5);
+}
+
+.card-img {
+    height: 180px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    border-bottom: 2px solid #2c313a;
+}
+
+/* затемнение для читаемости текста */
+.card-img::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 55%;
+    background: linear-gradient(to top, #0f141c, transparent);
+    pointer-events: none;
+}
+
+.category-title {
+    position: absolute;
+    bottom: 16px;
+    left: 20px;
+    font-size: 1.8rem;
+    font-weight: 700;
+    font-family: 'Oswald', sans-serif;
+    z-index: 2;
+    text-shadow: 0 4px 12px black;
+    color: #ffffff;
+    letter-spacing: 1px;
+}
+
+.card-content {
+    padding: 20px 18px 18px 18px;
+    background: #0f141c;
+}
+
+.card-desc {
+    font-size: 0.85rem;
+    color: #bdc3d0;
+    margin-bottom: 14px;
+    border-left: 3px solid #e31e24;
+    padding-left: 12px;
+    font-weight: 400;
+}
+
+/* выпадающее меню при ховере */
+.hover-menu {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out, opacity 0.25s ease, margin 0.2s;
+    background: #10161f;
+    border-radius: 18px;
+    margin-top: 0;
+    border: 1px solid #2a313e;
+}
+
+.failure-card:hover .hover-menu {
+    max-height: 340px;
+    opacity: 1;
+    margin-top: 18px;
+    overflow-y: auto;
+}
+
+/* кастомный скролл */
+.hover-menu::-webkit-scrollbar {
+    width: 4px;
+}
+.hover-menu::-webkit-scrollbar-track {
+    background: #1e2632;
+    border-radius: 4px;
+}
+.hover-menu::-webkit-scrollbar-thumb {
+    background: #e31e24;
+    border-radius: 4px;
+}
+
+.menu-list {
+    list-style: none;
+    padding: 10px 6px;
+}
+
+.menu-list li {
+    padding: 10px 14px;
+    margin: 6px 8px;
+    border-radius: 40px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    background: #1b212c;
+    transition: all 0.2s;
+    cursor: pointer;
+    color: #f0f3fa;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-left: 3px solid #e31e24;
+}
+
+/* убраны все странные значки (никаких ::before с иконками) */
+.menu-list li::before {
+    content: none;
+}
+
+.menu-list li:hover {
+    background: #2c3546;
+    transform: translateX(6px);
+    color: #ffffff;
+    border-left-color: #ff5e5e;
+}
+
+.hover-hint {
+    font-size: 0.7rem;
+    text-align: right;
+    color: #a0aaba;
+    margin-top: 12px;
+    letter-spacing: 0.3px;
+    font-weight: 400;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 5px;
+}
+
+/* картинки для блоков (тёмные, стильные) */
+.img-chassis {
+    background-image: linear-gradient(0deg, rgba(0,0,0,0.5), rgba(0,0,0,0.2)), url('https://images.unsplash.com/photo-1568605117036-5fe5e7fa0ac7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');
+    background-size: cover;
+}
+.img-engine {
+    background-image: linear-gradient(0deg, rgba(0,0,0,0.6), rgba(0,0,0,0.2)), url('https://images.unsplash.com/photo-1621346674330-d3a0e5b4b3b0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');
+    background-size: cover;
+    background-position: center 45%;
+}
+.img-transmission {
+    background-image: linear-gradient(0deg, rgba(0,0,0,0.6), rgba(0,0,0,0.2)), url('https://images.unsplash.com/photo-1487754180451-c456f719a1fc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');
+    background-size: cover;
+}
+.img-body {
+    background-image: linear-gradient(0deg, rgba(0,0,0,0.6), rgba(0,0,0,0.2)), url('https://images.unsplash.com/photo-1580273916550-e323be2ae537?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');
+    background-size: cover;
+    background-position: center 25%;
+}
+
+/* адаптация */
+@media (max-width: 850px) {
+    .content {
+        padding: 20px 18px;
+    }
+    .page-title {
+        font-size: 26px;
+        padding-left: 15px;
+    }
+    .category-title {
+        font-size: 1.4rem;
+        bottom: 12px;
+        left: 14px;
+    }
+    .cards-grid {
+        gap: 20px;
+    }
+}
+
+@media (max-width: 700px) {
+    .page {
+        grid-template-columns: 15% 1fr;
+    }
+    .left {
+        background-color: #b0b0b0;
+    }
+}
+
+/* ссылки внутри пунктов меню - убираем стандартное подчеркивание, делаем блок как ссылку */
+.menu-list li a {
+    display: block;
+    width: 100%;
+    color: inherit;
     text-decoration: none;
     font-weight: 500;
-    padding: 5px 0;
-}
-
-.repair-instruction {
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    margin-bottom: 20px;
-    display: none;
-}
-
-.repair-instruction.active {
-    display: block;
-}
-
-.repair-title {
-    font-size: 20px;
-    font-weight: 600;
-    color: #e31e24;
-    margin-bottom: 15px;
-}
-
-.repair-steps {
-    list-style: decimal;
-    padding-left: 20px;
-    margin-bottom: 15px;
-}
-
-.repair-step {
-    margin-bottom: 10px;
-    line-height: 1.6;
-}
-
-.repair-tools {
-    font-weight: 600;
-    margin-top: 15px;
-    color: #e31e24;
-}
-
-.repair-tips {
-    background-color: #f0f8ff;
-    padding: 10px;
-    border-radius: 5px;
-    margin-top: 15px;
-    border-left: 3px solid #4f74cb;
-}
-
-.back-button {
-    background-color: #e31e24;
-    color: white;
-    padding: 8px 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: 500;
-    margin-bottom: 15px;
-}
-
-.breadcrumb {
-    font-size: 14px;
-    color: #666;
-    margin-bottom: 15px;
-    padding: 10px;
-    background-color: #f5f5f5;
-    border-radius: 5px;
 }
