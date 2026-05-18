@@ -49,6 +49,34 @@
         </div>
 
         <main class="content">
+            <!-- Блок авторизации (показывается, если пользователь не вошел) -->
+            <div id="authBlock" class="auth-container hidden">
+                <div class="auth-tabs">
+                    <button class="tab-btn active" onclick="showTab('login')">Вход</button>
+                    <button class="tab-btn" onclick="showTab('register')">Регистрация</button>
+                </div>
+
+                <!-- Форма входа -->
+                <form id="loginForm" class="auth-form">
+                    <input type="text" id="loginUsername" placeholder="Логин" required>
+                    <input type="password" id="loginPassword" placeholder="Пароль" required>
+                    <button type="submit" class="f-btn f-btn-primary">Войти</button>
+                </form>
+
+                <!-- Форма регистрации -->
+                <form id="registerForm" class="auth-form hidden">
+                    <input type="text" id="regUsername" placeholder="Придумайте логин" required>
+                    <input type="password" id="regPassword" placeholder="Придумайте пароль" required>
+                    <button type="submit" class="f-btn f-btn-primary">Зарегистрироваться</button>
+                </form>
+            </div>
+
+            <!-- Приветствие пользователя (показывается, если вошел) -->
+            <div id="userGreeting" class="hidden" style="margin-bottom: 15px; font-weight: bold; color: #e31e24;">
+                Привет, <span id="currentUserName"></span>!
+                <button onclick="logout()"
+                    style="background:none; border:none; color:#666; cursor:pointer; text-decoration:underline;">Выйти</button>
+            </div>
             <div class="forum-wrapper">
                 <div class="forum-top">
                     <h1>Обсуждения</h1>
@@ -68,8 +96,11 @@
                 <section class="create-form hidden" id="createForm">
                     <h2>Создать тему</h2>
                     <form id="newTopicForm">
-                        <input type="text" id="topicTitle" placeholder="Заголовок (например: Плавают обороты на Приоре 1.6)" required>
-                        <textarea id="topicContent" placeholder="Опишите проблему подробнее: модель, год, пробег, симптомы..." rows="5" required></textarea>
+                        <input type="text" id="topicTitle"
+                            placeholder="Заголовок (например: Плавают обороты на Приоре 1.6)" required>
+                        <textarea id="topicContent"
+                            placeholder="Опишите проблему подробнее: модель, год, пробег, симптомы..." rows="5"
+                            required></textarea>
                         <div class="form-actions">
                             <button type="submit" class="f-btn f-btn-primary">Опубликовать</button>
                             <button type="button" class="f-btn f-btn-secondary" id="btnCancelCreate">Отмена</button>
@@ -84,7 +115,7 @@
         </footer>
     </div>
 
-<script src="static/js/forum.js"></script>
+    <script src="static/js/forum.js"></script>
 
 </body>
 

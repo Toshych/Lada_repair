@@ -116,6 +116,7 @@ body {
     font-weight: bold;
     cursor: pointer;
     color: #333;
+    font-size: 24px;
 }
 
 .submenu {
