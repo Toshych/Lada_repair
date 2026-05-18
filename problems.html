@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Lada Repair — Распространённые проблемы</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="static/styles/style1.css">
+    <link rel="stylesheet" href="static/styles/problems.css">
+</head>
+<body>
+    <div class="page">
+
+        <!-- Шапка (единая для всего сайта) -->
+        <div class="header">
+            <div class="header-left">
+                <div class="site-title">Lada Repair</div>
+                <div class="site-subtitle">Модели и типовые поломки LADA</div>
+            </div>
+            <div class="photoheader">
+                <a href="index.html">
+                    <img src="static/styles/image/photoheader.png" alt="Lada Repair Logo">
+                </a>
+            </div>
+        </div>
+
+        <!-- Боковое меню -->
+        <div class="left">
+            <div class="menu">
+                <div class="nav">
+                    &#9776;
+                    <div class="submenu">
+                        <div><a href="models_cars.html">Модели</a></div>
+                        <div><a href="#">Тип поломки</a></div>
+                        <div><a href="forumm.html">Форум</a></div>
+                        <div><a href="problems.html">Распространённые проблемы</a></div>
+                        <div><a href="parts.html">Запчасти</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Основной контент: список проблем-кнопок -->
+        <div class="content">
+            <h1 class="page-title">Частые неисправности автомобилей LADA</h1>
+            <p class="page-intro">
+                Список типовых проблем, с которыми сталкиваются владельцы LADA. 
+                Нажмите на проблему, чтобы узнать подробности и способы решения.
+            </p>
+
+            <div class="problems-list">
+                <!-- Проблема 1 -->
+                <a href="#" class="problem-button" data-problem="suspension">
+                    <span class="problem-text">ИЗНОС ЭЛЕМЕНТОВ ПОДВЕСКИ И ШАРОВЫХ ОПОР</span>
+                    <span class="problem-arrow">→</span>
+                </a>
+
+                <!-- Проблема 2 -->
+                <a href="#" class="problem-button" data-problem="oil-consumption">
+                    <span class="problem-text">ПОВЫШЕННЫЙ РАСХОД МАСЛА ДВИГАТЕЛЯ</span>
+                    <span class="problem-arrow">→</span>
+                </a>
+
+                <!-- Проблема 3 -->
+                <a href="#" class="problem-button" data-problem="corrosion">
+                    <span class="problem-text">КОРРОЗИЯ КУЗОВА: ПОРОГИ, АРКИ, ДНИЩЕ</span>
+                    <span class="problem-arrow">→</span>
+                </a>
+
+                <!-- Проблема 4 -->
+                <a href="#" class="problem-button" data-problem="ignition">
+                    <span class="problem-text">НЕИСПРАВНОСТИ СИСТЕМЫ ЗАЖИГАНИЯ И СВЕЧЕЙ</span>
+                    <span class="problem-arrow">→</span>
+                </a>
+
+                <!-- Проблема 5 -->
+                <a href="#" class="problem-button" data-problem="transmission">
+                    <span class="problem-text">ШУМ И ТРУДНОСТИ ПЕРЕКЛЮЧЕНИЯ КПП</span>
+                    <span class="problem-arrow">→</span>
+                </a>
+
+                <!-- Проблема 6 -->
+                <a href="#" class="problem-button" data-problem="electronics">
+                    <span class="problem-text">СБОИ ЭЛЕКТРОНИКИ И ДАТЧИКОВ</span>
+                    <span class="problem-arrow">→</span>
+                </a>
+
+                <!-- Проблема 7 -->
+                <a href="#" class="problem-button" data-problem="brakes">
+                    <span class="problem-text">ИЗНОС ТОРМОЗНЫХ КОЛОДОК И ДИСКОВ</span>
+                    <span class="problem-arrow">→</span>
+                </a>
+
+                <!-- Проблема 8 -->
+                <a href="#" class="problem-button" data-problem="cooling">
+                    <span class="problem-text">ПРОБЛЕМЫ СИСТЕМЫ ОХЛАЖДЕНИЯ И ТЕРМОСТАТА</span>
+                    <span class="problem-arrow">→</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Футер -->
+        <div class="footer">
+            <span>2026 Lada Repair. Все права защищены.</span>
+        </div>
+    </div>
+
+    <script>
+        // Простая обработка кликов по кнопкам (заглушка)
+        document.querySelectorAll('.problem-button').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const problem = btn.dataset.problem;
+                console.log('Выбрана проблема:', problem);
+                // Здесь можно добавить переход на детальную страницу или открытие модального окна
+                alert('Подробности по проблеме: ' + problem);
+            });
+        });
+    </script>
+</body>
+</html>
