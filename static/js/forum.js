@@ -1,45 +1,62 @@
-const API_URL = 'http://localhost:3000/api';
+// --- НАСТРОЙКИ SUPABASE ---
+const SUPABASE_URL = 'https://nkslanglqhrsdefzbfdv.supabase.co'; // <-- Вставь свой URL!
+const SUPABASE_KEY = 'sb_publishable_jGPiHru7Q_BumAXGIQs3Uw_i3MlZLTx'; // <-- Вставь свой полный ключ!
+
+
+let supabaseClient = null;
 let currentUser = null;
-let authToken = localStorage.getItem('ladaAuthToken'); // Храним токен в localStorage браузера
 
+// Инициализация после загрузки страницы
 document.addEventListener('DOMContentLoaded', () => {
+    if (typeof window.supabase === 'undefined') {
+        console.error('❌ Библиотека Supabase не загружена');
+        document.getElementById('topicList').innerHTML = '<li>Ошибка: не удалось загрузить библиотеку Supabase</li>';
+        return;
+    }
+
+    supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    console.log('✅ Supabase подключён');
+
     checkAuth();
     loadTopics();
-    setupEventListeners();
 });
 
-// --- Управление авторизацией ---
-console.log('Forum JS loaded!'); // Добавь эту строку в самое начало файла
-
-document.addEventListener('DOMContentLoaded', () => {
-    console.log('DOM Loaded, starting app...'); // И эту сюда
-    checkAuth();
-    loadTopics();
-    setupEventListeners();
-});
+// Проверка авторизации (простая, по имени)
 function checkAuth() {
     const username = localStorage.getItem('ladaUsername');
-    if (authToken && username) {
+    if (username) {
         currentUser = username;
         document.getElementById('authBlock').classList.add('hidden');
         document.getElementById('userGreeting').classList.remove('hidden');
         document.getElementById('currentUserName').textContent = username;
-        document.getElementById('btnToggleCreate').disabled = false; // Разрешаем создавать темы
+        document.getElementById('btnToggleCreate').disabled = false;
     } else {
         document.getElementById('authBlock').classList.remove('hidden');
         document.getElementById('userGreeting').classList.add('hidden');
-        document.getElementById('btnToggleCreate').disabled = true; // Запрещаем создавать темы
-        document.getElementById('btnToggleCreate').title = "Войдите, чтобы создать тему";
+        document.getElementById('btnToggleCreate').disabled = true;
     }
 }
 
-function logout() {
-    localStorage.removeItem('ladaAuthToken');
-    localStorage.removeItem('ladaUsername');
-    authToken = null;
-    currentUser = null;
-    location.reload();
-}
+// Вход (сохраняем имя в localStorage)
+document.getElementById('loginForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const username = document.getElementById('loginUsername').value.trim();
+    if (username) {
+        localStorage.setItem('ladaUsername', username);
+        checkAuth();
+    }
+});
+
+// Регистрация (аналогично входу)
+document.getElementById('registerForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const username = document.getElementById('regUsername').value.trim();
+    if (username) {
+        localStorage.setItem('ladaUsername', username);
+        alert('Регистрация успешна! Теперь вы вошли.');
+        checkAuth();
+    }
+});
 
 // Переключение вкладок Вход/Регистрация
 window.showTab = (tab) => {
@@ -60,83 +77,40 @@ window.showTab = (tab) => {
     }
 };
 
-// Обработка входа
-document.getElementById('loginForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const username = document.getElementById('loginUsername').value;
-    const password = document.getElementById('loginPassword').value;
+// Выход
+function logout() {
+    localStorage.removeItem('ladaUsername');
+    currentUser = null;
+    location.reload();
+}
 
-    try {
-        const res = await fetch(`${API_URL}/login`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ username, password })
-        });
-        const data = await res.json();
-        
-        if (res.ok) {
-            authToken = data.token;
-            localStorage.setItem('ladaAuthToken', authToken);
-            localStorage.setItem('ladaUsername', data.username);
-            checkAuth();
-            loadTopics(); // Перезагрузить темы, чтобы обновить UI если нужно
-        } else {
-            alert(data.error);
-        }
-    } catch (err) {
-        console.error(err);
-        alert('Ошибка соединения с сервером');
-    }
-});
-
-// Обработка регистрации
-document.getElementById('registerForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const username = document.getElementById('regUsername').value;
-    const password = document.getElementById('regPassword').value;
-
-    try {
-        const res = await fetch(`${API_URL}/register`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ username, password })
-        });
-        const data = await res.json();
-        
-        if (res.ok) {
-            alert('Регистрация успешна! Теперь войдите.');
-            showTab('login');
-        } else {
-            alert(data.error);
-        }
-    } catch (err) {
-        console.error(err);
-        alert('Ошибка соединения');
-    }
-});
-
-// --- Работа с темами форума ---
-
+// Загрузка тем из Supabase
 async function loadTopics() {
     const topicList = document.getElementById('topicList');
     const emptyState = document.getElementById('emptyState');
     
+    topicList.innerHTML = '<li>⏳ Загрузка...</li>';
+
     try {
-        const res = await fetch(`${API_URL}/topics`);
-        const topics = await res.json();
-        
+        const { data, error } = await supabaseClient
+            .from('topics')
+            .select('*')
+            .order('created_at', { ascending: false });
+
+        if (error) throw error;
+
         topicList.innerHTML = '';
         
-        if (topics.length === 0) {
+        if (!data || data.length === 0) {
             emptyState.classList.remove('hidden');
             return;
         }
         emptyState.classList.add('hidden');
 
-        topics.forEach(topic => {
+        data.forEach(topic => {
             const li = document.createElement('li');
             li.className = 'topic-card';
-            // Экранирование HTML для безопасности
+            
             const safeTitle = escapeHtml(topic.title);
             const safeContent = escapeHtml(topic.content);
             const safeAuthor = escapeHtml(topic.author_name || 'Аноним');
@@ -154,7 +128,8 @@ async function loadTopics() {
             topicList.appendChild(li);
         });
     } catch (err) {
-        console.error('Ошибка загрузки тем:', err);
+        console.error('❌ Ошибка загрузки тем:', err);
+        topicList.innerHTML = `<li>❌ Ошибка: ${err.message}</li>`;
     }
 }
 
@@ -179,31 +154,32 @@ btnCancelCreate.addEventListener('click', () => {
 
 newTopicForm.addEventListener('submit', async (e) => {
     e.preventDefault();
-    if (!authToken) return alert('Вы не авторизованы');
+    if (!currentUser) return alert('Вы не авторизованы');
 
     const title = document.getElementById('topicTitle').value.trim();
     const content = document.getElementById('topicContent').value.trim();
 
     try {
-        const res = await fetch(`${API_URL}/topics`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ title, content, token: authToken })
-        });
-        
-        if (res.ok) {
-            newTopicForm.reset();
-            createForm.classList.add('hidden');
-            loadTopics(); // Обновляем список
-        } else {
-            const data = await res.json();
-            alert(data.error);
-        }
+        const { error } = await supabaseClient.from('topics').insert([
+            { 
+                title: title, 
+                content: content, 
+                author_name: currentUser 
+            }
+        ]);
+
+        if (error) throw error;
+
+        newTopicForm.reset();
+        createForm.classList.add('hidden');
+        loadTopics(); // Обновляем список
     } catch (err) {
-        console.error(err);
+        console.error('❌ Ошибка создания темы:', err);
+        alert('Не удалось создать тему: ' + err.message);
     }
 });
 
+// Защита от XSS
 function escapeHtml(text) {
     if (!text) return '';
     return text
@@ -214,6 +190,6 @@ function escapeHtml(text) {
         .replace(/'/g, "&#039;");
 }
 
-function setupEventListeners() {
-    // Здесь можно добавить логику для ответов, если будешь реализовывать
-}
+// Делаем функции доступными из HTML
+window.logout = logout;
+window.showTab = showTab;
