@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>ЛАДА РЕМОНТ | Частые поломки LADA PRIORA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ========== БАЗОВЫЕ СТИЛИ ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            width: 100%;
+            font-family: 'Inter', sans-serif;
+            background: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .page {
+            margin: 0;
+            padding: 0;
+            display: grid;
+            grid-template-columns: 80px 1fr;
+            grid-template-rows: auto 1fr auto;
+            min-height: 100vh;
+            height: 100vh;
+        }
+
+        .header {
+            background: #1a1a1a;
+            color: #aaa;
+            grid-column: 1 / -1;
+            grid-row: 1;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            height: 80px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .header-left {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .site-title {
+            font-size: 28px;
+            font-weight: 600;
+            color: #ffffff;
+            font-family: 'Oswald', sans-serif;
+            letter-spacing: 1px;
+        }
+
+        .site-subtitle {
+            font-size: 13px;
+            color: #e31e24;
+            margin-top: 2px;
+            font-weight: 500;
+        }
+
+        .photoheader {
+            margin-left: auto;
+            padding: 0 20px;
+        }
+
+        .photoheader img {
+            width: auto;
+            height: 60px;
+            object-fit: contain;
+        }
+
+        .left {
+            grid-row: 2 / 4;
+            background-color: #d9d9d9;
+            position: relative;
+        }
+
+        .menu {
+            display: flex;
+            justify-content: center;
+            padding-top: 20px;
+        }
+
+        .nav {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            cursor: pointer;
+            background: #bfbfbf;
+            border-radius: 12px;
+            transition: all 0.2s;
+        }
+
+        .nav:hover {
+            background: #a0a0a0;
+        }
+
+        .submenu {
+            position: absolute;
+            left: 80px;
+            top: 100px;
+            width: 250px;
+            background-color: #d9d9d9;
+            transform: translateX(-20px);
+            transition: all 0.3s ease;
+            pointer-events: none;
+            visibility: hidden;
+            z-index: 1000;
+            box-shadow: 4px 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .submenu > div {
+            padding: 12px 20px;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid #b0b0b0;
+        }
+
+        .submenu > div:hover {
+            transform: translateX(5px);
+            background-color: #4f74cb;
+        }
+
+        .submenu > div:hover a {
+            color: white;
+        }
+
+        .submenu a {
+            color: #1a1a1a;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .nav:hover .submenu {
+            transform: translateX(0);
+            pointer-events: auto;
+            visibility: visible;
+        }
+
+        .content {
+            grid-row: 2 / 4;
+            padding: 20px 30px 40px 30px;
+            overflow-y: auto;
+            background: #f5f5f5;
+        }
+
+        .footer {
+            background: #1a1a1a;
+            color: #aaa;
+            grid-column: 1/-1;
+            grid-row: 4;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+
+        /* ========== СТИЛИ ДЛЯ КАРТОЧЕК ========== */
+        .page-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 32px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+            border-left: 5px solid #e31e24;
+            padding-left: 20px;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .failure-card {
+            background: #181e26;
+            border-radius: 24px;
+            overflow: hidden;
+            transition: all 0.3s;
+            box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .failure-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 28px 38px -14px rgba(0, 0, 0, 0.6);
+            border-color: rgba(227, 30, 36, 0.5);
+        }
+
+        .card-img {
+            height: 180px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .card-img::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 55%;
+            background: linear-gradient(to top, #0f141c, transparent);
+        }
+
+        .category-title {
+            position: absolute;
+            bottom: 16px;
+            left: 20px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            font-family: 'Oswald', sans-serif;
+            z-index: 2;
+            text-shadow: 0 4px 12px black;
+            color: #ffffff;
+        }
+
+        .card-content {
+            padding: 20px;
+            background: #0f141c;
+        }
+
+        .card-desc {
+            font-size: 0.85rem;
+            color: #bdc3d0;
+            margin-bottom: 14px;
+            border-left: 3px solid #e31e24;
+            padding-left: 12px;
+        }
+
+        .hover-menu {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, opacity 0.2s ease;
+            background: #10161f;
+            border-radius: 18px;
+            border: 1px solid #2a313e;
+        }
+
+        .failure-card:hover .hover-menu {
+            max-height: 400px;
+            opacity: 1;
+            margin-top: 15px;
+        }
+
+        .menu-list {
+            list-style: none;
+            padding: 10px;
+        }
+
+        .menu-list li {
+            padding: 10px 14px;
+            margin: 6px 0;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            background: #1b212c;
+            transition: all 0.2s;
+            cursor: pointer;
+            color: #f0f3fa;
+            border-left: 3px solid #e31e24;
+        }
+
+        .menu-list li a {
+            display: block;
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .menu-list li:hover {
+            background: #2c3546;
+            transform: translateX(6px);
+            color: #ffffff;
+        }
+
+        /* Пункты с подменю (двигатели) */
+        .engine-item {
+            position: relative;
+        }
+
+        .engine-submenu {
+            display: none;
+            position: absolute;
+            left: 100%;
+            top: 0;
+            margin-left: 10px;
+            background: #0f141c;
+            border-radius: 16px;
+            min-width: 280px;
+            padding: 8px 0;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            border: 1px solid #e31e24;
+            z-index: 10000;
+        }
+
+        .engine-item:hover .engine-submenu {
+            display: block;
+        }
+
+        .engine-submenu ul {
+            list-style: none;
+        }
+
+        .engine-submenu li {
+            padding: 8px 18px;
+            font-size: 0.85rem;
+            color: #e0e4f0;
+            border-left: 2px solid transparent;
+            margin: 0;
+            border-radius: 0;
+        }
+
+        .engine-submenu li:hover {
+            background: #2c3546;
+            border-left-color: #e31e24;
+        }
+
+        /* Картинки */
+        .img-chassis {
+            background-image: linear-gradient(0deg, rgba(0,0,0,0.5), rgba(0,0,0,0.2)), url('https://i.pinimg.com/736x/c0/9a/5e/c09a5ee9e301ac880beb555364866a8f.jpg');
+            background-size: cover;
+        }
+        .img-engine {
+            background-image: linear-gradient(0deg, rgba(0,0,0,0.6), rgba(0,0,0,0.2)), url('https://i.pinimg.com/736x/51/0b/c8/510bc871462d65aaeb78216a2a353111.jpg');
+            background-size: cover;
+        }
+        .img-transmission {
+            background-image: linear-gradient(0deg, rgba(0,0,0,0.6), rgba(0,0,0,0.2)), url('https://i.pinimg.com/736x/a4/1b/83/a41b836cd15a0273ca90b91081386336.jpg');
+            background-size: cover;
+        }
+        .img-body {
+            background-image: linear-gradient(0deg, rgba(0,0,0,0.6), rgba(0,0,0,0.2)), url('https://i.pinimg.com/736x/c4/98/47/c49847717b2d8b9e078d80954b8dd1ff.jpg');
+            background-size: cover;
+        }
+
+        @media (max-width: 850px) {
+            .content { padding: 15px; }
+            .page-title { font-size: 24px; }
+            .category-title { font-size: 1.4rem; }
+            .engine-submenu { left: auto; right: 0; top: 100%; margin-left: 0; margin-top: 5px; min-width: 250px; }
+            .engine-item:hover .engine-submenu { display: block; }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+
+        <div class="header">
+            <div class="header-left">
+                <div class="site-title">Lada Repair</div>
+                <div class="site-subtitle">Модели и типовые поломки LADA</div>
+            </div>
+            <div class="photoheader">
+                <a href="index.html">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Lada_logo.svg/2560px-Lada_logo.svg.png" alt="Lada Repair Logo" style="height: 55px; filter: brightness(0) invert(1);">
+                </a>
+            </div>
+        </div>
+
+        <div class="left">
+            <div class="menu">
+                <div class="nav">
+                    ☰
+                    <div class="submenu">
+                        <div><a href="#">Модели</a></div>
+                        <div><a href="#">Тип поломки</a></div>
+                        <div><a href="#">Форум</a></div>
+                        <div><a href="#">Распространённые проблемы</a></div>
+                        <div><a href="#">Запчасти</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <h1 class="page-title">Типичные неисправности LADA PRIORA</h1>
+
+            <div class="cards-grid">
+                <!-- Ходовая часть -->
+                <div class="failure-card">
+                    <div class="card-img img-chassis">
+                        <div class="category-title">Ходовая часть</div>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-desc">Стуки, крены, износ резины. Диагностика подвески и тормозов.</div>
+                        <div class="hover-menu">
+                            <ul class="menu-list">
+                                <li><a href="#">Тормозная система</a></li>
+                                <li><a href="#">Сайлентблоки</a></li>
+                                <li><a href="#">Амортизаторы</a></li>
+                                <li><a href="#">Подшипники</a></li>
+                                <li><a href="#">Рычаги</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Двигатель -->
+                <div class="failure-card">
+                    <div class="card-img img-engine">
+                        <div class="category-title">Двигатель</div>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-desc">Потеря мощности, масложор, шум ГРМ. Выберите тип мотора.</div>
+                        <div class="hover-menu">
+                            <ul class="menu-list">
+                                <li class="engine-item">
+                                    <span>8-клапанный двигатель ▶</span>
+                                    <div class="engine-submenu">
+                                        <ul>
+                                            <li><a href="#">ВАЗ-21114 (1.6) — Granta, Kalina, Priora</a></li>
+                                            <li><a href="#">ВАЗ-11183 (1.6) — Largus, Granta</a></li>
+                                            <li><a href="#">ВАЗ-21083 (1.5) — Samara, classic</a></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li class="engine-item">
+                                    <span>16-клапанный двигатель ▶</span>
+                                    <div class="engine-submenu">
+                                        <ul>
+                                            <li><a href="#">ВАЗ-21126 (1.6, 98 л.с.) — Priora, Kalina</a></li>
+                                            <li><a href="#">ВАЗ-21127 (1.6, 106 л.с.) — Granta, Kalina 2</a></li>
+                                            <li><a href="#">ВАЗ-21129 (1.6, 106 л.с.) — Vesta, XRAY</a></li>
+                                            <li><a href="#">ВАЗ-21179 (1.8, 122 л.с.) — Vesta, XRAY</a></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Коробка передач -->
+                <div class="failure-card">
+                    <div class="card-img img-transmission">
+                        <div class="category-title">Коробка передач</div>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-desc">Затрудненное переключение, шум, рывки. МКПП, АМТ.</div>
+                        <div class="hover-menu">
+                            <ul class="menu-list">
+                                <li><a href="#">Механическая КПП</a></li>
+                                <li><a href="#">Роботизированная АМТ</a></li>
+                                <li><a href="#">Сцепление в сборе</a></li>
+                                <li><a href="#">Дифференциал / полуоси</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Кузов -->
+                <div class="failure-card">
+                    <div class="card-img img-body">
+                        <div class="category-title">Кузов</div>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-desc">Коррозия порогов, сколы, потеря геометрии.</div>
+                        <div class="hover-menu">
+                            <ul class="menu-list">
+                                <li><a href="#">Антикоррозийная обработка</a></li>
+                                <li><a href="#">Переварка кузова</a></li>
+                                <li><a href="#">Покраска</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <span>© 2025 LADA РЕМОНТ | Профессиональный ремонт и диагностика | Запись по тел: +7 (999) 123-45-67</span>
+        </div>
+    </div>
+</body>
+</html>
